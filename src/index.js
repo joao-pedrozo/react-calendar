@@ -5,6 +5,7 @@ import { Provider as ReduxProvider } from "react-redux";
 import Main from "./Main";
 import reducers from "./reducers";
 import reportWebVitals from "./reportWebVitals";
+import { ContextProvider as CalendarContextProvider } from "./hooks/useCalendar";
 import getStore from "./store/getStore";
 
 // import main sass file
@@ -13,7 +14,9 @@ import "./sass/app.scss";
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={getStore(reducers)}>
-      <Main />
+      <CalendarContextProvider>
+        <Main />
+      </CalendarContextProvider>
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById("root")

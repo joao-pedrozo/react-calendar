@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import AddReminderModalModal from "../../components/AddReminderModal";
 import "./styles.scss";
+import { CalendarContext } from "../../hooks/useCalendar";
 
 const DAYS_IN_A_WEEK = 7;
 
@@ -35,6 +36,9 @@ function Calendar(props) {
   const [days, setDays] = useState([]);
   const [showAddReminderModal, setShowReminderModal] = useState(false);
   const [selectedDay, setSelectedDay] = useState(new Date());
+
+  const { reminders } = useContext(CalendarContext);
+
   useEffect(() => {
     setDays(setCalendarDays({ monthIndex, year }));
   }, [monthIndex, year]);
@@ -86,12 +90,21 @@ function Calendar(props) {
         <ul>
           {days.map((day) => (
             <li key={day.getTime()} onClick={() => handleOnClickDay(day)}>
-              <b>
-                {day
-                  .toLocaleDateString("default", { weekday: "short" })
-                  .replace(".", "")}
-              </b>
-              <span>{day.getDate()}</span>
+              <div className="header">
+                <b>
+                  {day
+                    .toLocaleDateString("default", { weekday: "short" })
+                    .replace(".", "")}
+                </b>
+                <span>{day.getDate()}</span>
+              </div>
+              <div className="reminders">
+                {reminders.map(
+                  (reminder) =>
+                    new Date(reminder.date).toDateString() ===
+                      day.toDateString() && <span>{reminder.title}</span>
+                )}
+              </div>
             </li>
           ))}
         </ul>

@@ -23,10 +23,6 @@ code {
   margin: 0;
 }
 
-* + * {
-  margin-top: 1rem;
-}
-
 h1,
 h2,
 h3,
@@ -35,10 +31,6 @@ h5,
 h6 {
   color: #222;
   line-height: 1.1;
-
-  + * {
-    margin-top: 0.5rem;
-  }
 }
 
 strong {

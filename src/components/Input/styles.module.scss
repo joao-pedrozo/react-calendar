@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  label b {
+    font-weight: 600;
+  }
+
+  &__input-wrapper {
+    display: flex;
+    border: 1px solid #ebeaed;
+    background-color: #f5f4f6;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    margin-top: 2px;
+
+    input {
+      border: none;
+      background: none;
+      color: #170c3a;
+      width: 100%;
+      outline: none;
+    }
+  }
+}
