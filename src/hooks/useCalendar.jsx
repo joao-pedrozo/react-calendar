@@ -10,6 +10,7 @@ const CalendarContext = createContext();
 
 const ContextProvider = ({ children }) => {
   const [reminders, setReminders] = useState(initialReminders());
+  const [selectedReminder, setSelectedReminder] = useState(null);
 
   useEffect(() => {
     localStorage.setItem("events", JSON.stringify(reminders));
@@ -20,6 +21,8 @@ const ContextProvider = ({ children }) => {
       value={{
         reminders,
         setReminders,
+        selectedReminder,
+        setSelectedReminder,
       }}
     >
       {children}

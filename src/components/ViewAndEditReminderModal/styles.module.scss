@@ -1,0 +1,15 @@
+.container {
+  background-color: #fff;
+  width: 400px;
+  padding: 2rem 2rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import AddReminderModalModal from "../../components/AddReminderModal";
+import AddReminderModal from "../../components/AddReminderModal";
+import ViewAndEditReminderModal from "../../components/ViewAndEditReminderModal";
 import "./styles.scss";
 import { CalendarContext } from "../../hooks/useCalendar";
 
@@ -34,14 +35,22 @@ function Calendar(props) {
   const [monthIndex, setMonthIndex] = useState(new Date().getMonth());
   const [year, getCurrentYear] = useState(new Date().getFullYear());
   const [days, setDays] = useState([]);
-  const [showAddReminderModal, setShowReminderModal] = useState(false);
+  const [showAddReminderModal, setShowAddReminderModal] = useState(false);
+  const [showViewAndEditReminderModal, setShowViewAndEditReminderModal] =
+    useState(false);
   const [selectedDay, setSelectedDay] = useState(new Date());
 
-  const { reminders } = useContext(CalendarContext);
+  const { reminders, setSelectedReminder } = useContext(CalendarContext);
 
   useEffect(() => {
     setDays(setCalendarDays({ monthIndex, year }));
   }, [monthIndex, year]);
+
+  const handleOnReminderClick = (reminder) => {
+    setSelectedReminder(reminder);
+    setShowViewAndEditReminderModal(true);
+    setShowAddReminderModal(false);
+  };
 
   const handlePreviousButtonPress = () => {
     if (monthIndex === 0) {
@@ -67,7 +76,7 @@ function Calendar(props) {
   };
 
   const handleOnClickDay = (date) => {
-    setShowReminderModal(true);
+    setShowAddReminderModal(true);
     setSelectedDay(date);
   };
 
@@ -99,19 +108,35 @@ function Calendar(props) {
                 <span>{day.getDate()}</span>
               </div>
               <div className="reminders">
-                {reminders.map(
-                  (reminder) =>
-                    new Date(reminder.date).toDateString() ===
-                      day.toDateString() && <span>{reminder.title}</span>
+                {reminders
+                  .filter(
+                    (reminder) =>
+                      new Date(reminder.date).toDateString() ===
+                      day.toDateString()
+                  )
+                  .slice(-2)
+                  .map((reminder) => (
+                    <div
+                      className="reminder-wrapper"
+                      style={{ backgroundColor: reminder.color }}
+                      onClick={() => handleOnReminderClick(reminder)}
+                    >
+                      <b>{reminder.title}</b>
+                    </div>
+                  ))}
+                {reminders.length > 2 && (
+                  <div className="reminder-wrapper">
+                    <b>View All</b>
+                  </div>
                 )}
               </div>
             </li>
           ))}
         </ul>
       </div>
-      <AddReminderModalModal
+      <AddReminderModal
         showModal={showAddReminderModal}
-        setShowModal={setShowReminderModal}
+        setShowModal={setShowAddReminderModal}
         selectedDate={selectedDay}
       />
     </>

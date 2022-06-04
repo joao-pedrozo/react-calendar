@@ -12,10 +12,11 @@ import ColorPicker from "../ColorPicker";
 import { useState, useEffect, useContext } from "react";
 import { api } from "../../services/api";
 
-const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
+const AddReminderModalModal = ({ setShowModal, showModal }) => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
 
-  const { reminders, setReminders } = useContext(CalendarContext);
+  const { reminders, setReminders, selectedReminder } =
+    useContext(CalendarContext);
 
   const schema = yup.object({
     title: yup.string().required("Title field is required"),
@@ -81,7 +82,7 @@ const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
   return (
     <BaseModal showModal={showModal} setShowModal={setShowModal}>
       <div className={styles.container}>
-        <h1>Add Reminder</h1>
+        <h1>View and Edit Reminder</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             label="Title"
@@ -101,7 +102,7 @@ const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
             name="date"
             placeholder="New York"
             type="datetime-local"
-            defaultValue={selectedDate.toISOString().slice(0, 16)}
+            defaultValue={selectedReminder.date.slice(0, 16)}
             {...register("date")}
           />
           <ColorPicker

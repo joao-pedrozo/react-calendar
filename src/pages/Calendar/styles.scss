@@ -17,8 +17,7 @@
     grid-template-columns: repeat(7, 1fr);
     list-style: none;
     margin: 0 auto;
-    width: 100%;
-    max-width: 1000px;
+    width: 800px;
 
     li {
       border: 1px solid black;
@@ -28,6 +27,7 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
+      cursor: pointer;
 
       .header {
         display: flex;
@@ -36,7 +36,22 @@
 
       .reminders {
         width: 100%;
-        background: red;
+
+        .reminder-wrapper {
+          color: #fff;
+          width: 110px;
+          text-overflow: ellipsis;
+          padding: 0 0.5rem;
+          background-color: #3471eb;
+
+          b {
+            font-weight: 500;
+            width: 50px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
       }
     }
   }
