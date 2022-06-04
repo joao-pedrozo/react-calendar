@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    text-align: center;
+  }
+
+  &__buttons-wrapper {
+    display: flex;
+    gap: 1rem;
+  }
+
+  ul {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    list-style: none;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+
+    li {
+      border: 1px solid black;
+      height: 120px;
+      margin: 0 -1px -1px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}
