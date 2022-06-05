@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import colors from "../../utils/colors";
 import { CalendarContext } from "../../hooks/useCalendar";
-// import { v4 } from "uuid";
+import { v4 } from "uuid";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -62,7 +62,7 @@ const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
       setReminders([
         ...reminders,
         {
-          // id: v4(),
+          id: v4(),
           title,
           color: selectedColor,
           date,

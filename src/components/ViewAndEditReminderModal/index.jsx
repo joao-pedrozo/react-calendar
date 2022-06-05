@@ -60,11 +60,12 @@ const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
       );
 
       setReminders([
-        ...reminders,
+        ...reminders.filter((reminder) => reminder.id !== selectedReminder.id),
         {
+          id: selectedReminder.id,
           title,
           color: selectedColor,
-          date: new Date(date),
+          date,
           city,
           temp: resultInSameHour ? resultInSameHour.main.temp : null,
         },
