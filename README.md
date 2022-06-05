@@ -50,6 +50,15 @@ $ yarn start
 http://localhost:3000/calendar
 ```
 
+### Tests
+
+You can run the tests by the following command:
+
+```bash
+# Run tests
+$ yarn test
+```
+
 ## Final considerations
 
 I really enjoyed doing this challenge and I just think I messed up a little about styling, it was my first time using SASS with React and I kinda messed up about modules and BEM, using in some places and in others don't. In a daily basis I would spend more time without pressure to analize and implement following a pattern. Anyway, thanks for reading, hope you guys enjoy my test!
