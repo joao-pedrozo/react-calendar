@@ -129,7 +129,7 @@ const Form = ({ currentModalVisibility, setShowModal, selectedDate }) => {
         type="datetime-local"
         defaultValue={
           selectedReminder?.date?.slice(0, 16) ||
-          selectedDate.toISOString().slice(0, 16)
+          selectedDate?.toISOString().slice(0, 16)
         }
         error={errors?.date}
         {...register("date")}

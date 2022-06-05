@@ -1,7 +1,8 @@
-import { MdOutlineColorLens } from "react-icons/md";
 import { BsCheck } from "react-icons/bs";
-import styles from "./styles.module.scss";
+import { MdOutlineColorLens } from "react-icons/md";
+
 import colors from "../../utils/colors";
+import styles from "./styles.module.scss";
 
 const ColorPicker = ({ selectedColor, setSelectedColor }) => (
   <div className={styles.container}>

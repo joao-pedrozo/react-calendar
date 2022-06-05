@@ -1,5 +1,6 @@
-import styles from "./styles.module.scss";
 import { TbTemperature } from "react-icons/tb";
+
+import styles from "./styles.module.scss";
 
 const TemperatureDisplayer = ({ temperature }) => (
   <div className={styles.container}>

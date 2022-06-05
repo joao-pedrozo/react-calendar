@@ -12,7 +12,7 @@ function getHours(date) {
 }
 
 const ShowAllRemindersModal = ({ setShowModal, showModal, selectedDate }) => {
-  const { reminders, setSelectedReminder } = useContext(CalendarContext);
+  const { reminders } = useContext(CalendarContext);
 
   const handleOnCloseButtonClick = () => {
     setShowModal(false);
