@@ -34,7 +34,7 @@ const setCalendarDays = ({ monthIndex, year }) => {
 
 function Calendar(props) {
   const [monthIndex, setMonthIndex] = useState(new Date().getMonth());
-  const [year, getCurrentYear] = useState(new Date().getFullYear());
+  const [year, setCurrentYear] = useState(new Date().getFullYear());
   const [days, setDays] = useState([]);
   const [showAddReminderModal, setShowAddReminderModal] = useState(false);
   const [showViewAndEditReminderModal, setShowViewAndEditReminderModal] =
@@ -55,7 +55,7 @@ function Calendar(props) {
   const handlePreviousButtonPress = () => {
     if (monthIndex === 0) {
       setMonthIndex(11);
-      getCurrentYear((year) => year - 1);
+      setCurrentYear((year) => year - 1);
     } else {
       setMonthIndex((monthIndex) => monthIndex - 1);
     }
@@ -64,7 +64,7 @@ function Calendar(props) {
   const handleNextButtonPress = () => {
     if (monthIndex === 11) {
       setMonthIndex(0);
-      getCurrentYear((year) => year + 1);
+      setCurrentYear((year) => year + 1);
     } else {
       setMonthIndex((monthIndex) => monthIndex + 1);
     }
@@ -72,7 +72,7 @@ function Calendar(props) {
 
   const handleOnTodayButtonPress = () => {
     setMonthIndex(new Date().getMonth());
-    getCurrentYear((year) => new Date().getFullYear());
+    setCurrentYear(new Date().getFullYear());
   };
 
   const handleOnClickDay = (event, date) => {
