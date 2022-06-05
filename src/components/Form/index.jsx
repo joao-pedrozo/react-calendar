@@ -6,8 +6,8 @@ import { v4 } from "uuid";
 import * as yup from "yup";
 
 import { CalendarContext } from "../../hooks/useCalendar";
-import { api } from "../../services/api";
 import colors from "../../utils/colors";
+import { getWeatherResults } from "../../utils/data";
 import Button from "../Button/index";
 import ColorPicker from "../ColorPicker";
 import Input from "../Input";
@@ -44,13 +44,7 @@ const Form = ({ currentModalVisibility, setShowModal, selectedDate }) => {
 
   const onSubmit = async ({ title, city, date }) => {
     try {
-      const weatherResults = await api.get("forecast", {
-        params: {
-          appid: process.env.REACT_APP_API_KEY,
-          units: "metric",
-          q: city,
-        },
-      });
+      const weatherResults = await getWeatherResults(city);
 
       const resultsInSameDay = weatherResults.data.list.filter(
         (forecast) => forecast.dt_txt.slice(0, 10) === date.slice(0, 10)
