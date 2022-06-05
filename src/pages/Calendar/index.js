@@ -49,7 +49,6 @@ function Calendar(props) {
   const handleOnReminderClick = (reminder) => {
     setSelectedReminder(reminder);
     setShowViewAndEditReminderModal(true);
-    setShowAddReminderModal(false);
   };
 
   const handlePreviousButtonPress = () => {
@@ -75,9 +74,11 @@ function Calendar(props) {
     getCurrentYear((year) => new Date().getFullYear());
   };
 
-  const handleOnClickDay = (date) => {
-    setShowAddReminderModal(true);
-    setSelectedDay(date);
+  const handleOnClickDay = (event, date) => {
+    if (event.target.getAttribute("class") === "calendar-day") {
+      setShowAddReminderModal(true);
+      setSelectedDay(date);
+    }
   };
 
   return (
@@ -98,7 +99,11 @@ function Calendar(props) {
 
         <ul>
           {days.map((day) => (
-            <li key={day.getTime()} onClick={() => handleOnClickDay(day)}>
+            <li
+              key={day.getTime()}
+              onClick={(event) => handleOnClickDay(event, day)}
+              className="calendar-day"
+            >
               <div className="header">
                 <b>
                   {day
@@ -121,10 +126,14 @@ function Calendar(props) {
                       style={{ backgroundColor: reminder.color }}
                       onClick={() => handleOnReminderClick(reminder)}
                     >
-                      <b>{reminder.title}</b>
+                      <b className="reminder-title">{reminder.title}</b>
                     </div>
                   ))}
-                {reminders.length > 2 && (
+                {reminders.filter(
+                  (reminder) =>
+                    new Date(reminder.date).toDateString() ===
+                    day.toDateString()
+                ).length > 2 && (
                   <div className="reminder-wrapper">
                     <b>View All</b>
                   </div>
@@ -138,6 +147,10 @@ function Calendar(props) {
         showModal={showAddReminderModal}
         setShowModal={setShowAddReminderModal}
         selectedDate={selectedDay}
+      />
+      <ViewAndEditReminderModal
+        showModal={showViewAndEditReminderModal}
+        setShowModal={setShowViewAndEditReminderModal}
       />
     </>
   );
