@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
+
 import AddReminderModal from "../../components/AddReminderModal";
 import ViewAndEditReminderModal from "../../components/ViewAndEditReminderModal";
 import "./styles.scss";
@@ -75,7 +76,7 @@ function Calendar(props) {
   };
 
   const handleOnClickDay = (event, date) => {
-    if (event.target.getAttribute("class") === "calendar-day") {
+    if (event.target.id === "calendar-day") {
       setShowAddReminderModal(true);
       setSelectedDay(date);
     }
@@ -103,6 +104,7 @@ function Calendar(props) {
               key={day.getTime()}
               onClick={(event) => handleOnClickDay(event, day)}
               className="calendar-day"
+              id="calendar-day"
             >
               <div className="header">
                 <b>
