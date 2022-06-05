@@ -1,14 +1,8 @@
-import { useState, useEffect, useContext } from "react";
-
 import BaseModal from "../BaseModal";
 import Form from "../Form";
 import styles from "./styles.module.scss";
 
 const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
-  // useEffect(() => {
-  //   setSelectedColor(colors[0]);
-  // }, [showModal]);
-
   return (
     <BaseModal showModal={showModal} setShowModal={setShowModal}>
       <div className={styles.container}>
@@ -17,7 +11,6 @@ const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
           setShowModal={setShowModal}
           selectedDate={selectedDate}
           currentModalVisibility={showModal}
-          action="add"
         />
       </div>
     </BaseModal>
