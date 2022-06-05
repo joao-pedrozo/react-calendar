@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import colors from "../../utils/colors";
 import { CalendarContext } from "../../hooks/useCalendar";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,6 +10,7 @@ import styles from "./styles.module.scss";
 import ColorPicker from "../ColorPicker";
 import { useState, useEffect, useContext } from "react";
 import { api } from "../../services/api";
+import TemperatureDisplayer from "../TemperatureDisplayer";
 
 const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
   const { reminders, setReminders, selectedReminder } =
@@ -112,6 +112,8 @@ const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
           />
+          <TemperatureDisplayer temperature={selectedReminder.temp} />
+
           <button type="submit">Botão</button>
         </form>
       </div>
