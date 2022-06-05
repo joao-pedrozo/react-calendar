@@ -1,4 +1,4 @@
-.container {
+.input-container {
   display: flex;
   flex-direction: column;
 
@@ -6,13 +6,23 @@
     font-weight: 600;
   }
 
-  &__input-wrapper {
+  &__input-parent {
     display: flex;
     border: 1px solid #ebeaed;
     background-color: #f5f4f6;
     border-radius: 4px;
     padding: 0.5rem 1rem;
     margin-top: 2px;
+    transition: all 0.3s ease-out;
+
+    &--errored {
+      background: #feefee;
+      border: 1px solid red;
+
+      input::placeholder {
+        color: #f95e5a;
+      }
+    }
 
     input {
       border: none;
@@ -20,6 +30,12 @@
       color: #170c3a;
       width: 100%;
       outline: none;
+    }
+
+    svg {
+      font-size: 1.2rem;
+      color: red;
+      opacity: 0.5;
     }
   }
 }

@@ -1,17 +1,17 @@
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
-import colors from "../../utils/colors";
-import { CalendarContext } from "../../hooks/useCalendar";
-import { v4 } from "uuid";
 
 import { yupResolver } from "@hookform/resolvers/yup";
+import { v4 } from "uuid";
 import * as yup from "yup";
 
+import { CalendarContext } from "../../hooks/useCalendar";
+import { api } from "../../services/api";
+import colors from "../../utils/colors";
 import BaseModal from "../BaseModal";
+import ColorPicker from "../ColorPicker";
 import Input from "../Input";
 import styles from "./styles.module.scss";
-import ColorPicker from "../ColorPicker";
-import { useState, useEffect, useContext } from "react";
-import { api } from "../../services/api";
 
 const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
@@ -38,7 +38,7 @@ const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onSubmit",
-    reValidateMode: "onBlur",
+    reValidateMode: "onChange",
   });
 
   const onSubmit = async ({ title, city, date }) => {
@@ -90,12 +90,14 @@ const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
             name="title"
             maxLength={30}
             placeholder="Dinner with mom"
+            error={errors?.title}
             {...register("title")}
           />
           <Input
             label="City"
             name="city"
             placeholder="New York"
+            error={errors?.city}
             {...register("city")}
           />
           <Input
@@ -104,6 +106,7 @@ const AddReminderModalModal = ({ setShowModal, showModal, selectedDate }) => {
             placeholder="New York"
             type="datetime-local"
             defaultValue={selectedDate.toISOString().slice(0, 16)}
+            error={errors?.date}
             {...register("date")}
           />
           <ColorPicker
