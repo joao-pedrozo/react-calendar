@@ -26,7 +26,7 @@ const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
 
   useEffect(() => {
     reset();
-    setSelectedColor(colors[0]);
+    setSelectedColor(selectedReminder?.color);
   }, [showModal]);
 
   const {
