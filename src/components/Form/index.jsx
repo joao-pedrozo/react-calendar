@@ -17,12 +17,7 @@ const schema = yup.object({
   date: yup.string().required("Date field is required"),
 });
 
-const Form = ({
-  currentModalVisibility,
-  setShowModal,
-  selectedDate,
-  action,
-}) => {
+const Form = ({ currentModalVisibility, setShowModal, selectedDate }) => {
   const {
     register,
     handleSubmit,
@@ -35,11 +30,13 @@ const Form = ({
     reValidateMode: "onChange",
   });
 
-  const { reminders, setReminders } = useContext(CalendarContext);
+  const { reminders, setReminders, selectedReminder } =
+    useContext(CalendarContext);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
 
   useEffect(() => {
     reset();
+    setSelectedColor(selectedReminder?.color || colors[0]);
   }, [currentModalVisibility, reset]);
 
   const onSubmit = async ({ title, city, date }) => {
@@ -60,17 +57,33 @@ const Form = ({
         (result) => result.dt_txt.slice(11, -6) === date.slice(11, -3)
       );
 
-      setReminders([
-        ...reminders,
-        {
-          id: v4(),
-          title,
-          color: selectedColor,
-          date,
-          city,
-          temp: resultInSameHour ? resultInSameHour.main.temp : null,
-        },
-      ]);
+      if (!selectedReminder) {
+        setReminders([
+          ...reminders,
+          {
+            id: v4(),
+            title,
+            color: selectedColor,
+            date,
+            city,
+            temp: resultInSameHour ? resultInSameHour.main.temp : null,
+          },
+        ]);
+      } else {
+        setReminders([
+          ...reminders.filter(
+            (reminder) => reminder.id !== selectedReminder.id
+          ),
+          {
+            id: selectedReminder.id,
+            title,
+            color: selectedColor,
+            date,
+            city,
+            temp: resultInSameHour ? resultInSameHour.main.temp : null,
+          },
+        ]);
+      }
 
       setShowModal(false);
     } catch (err) {
@@ -91,6 +104,7 @@ const Form = ({
         maxLength={30}
         placeholder="Dinner with mom"
         error={errors?.title}
+        defaultValue={selectedReminder?.title || ""}
         {...register("title")}
       />
       <Input
@@ -98,6 +112,7 @@ const Form = ({
         name="city"
         placeholder="New York"
         error={errors?.city}
+        defaultValue={selectedReminder?.city || ""}
         {...register("city")}
       />
       <Input
@@ -105,7 +120,10 @@ const Form = ({
         name="date"
         placeholder="New York"
         type="datetime-local"
-        defaultValue={selectedDate.toISOString().slice(0, 16)}
+        defaultValue={
+          selectedReminder?.date?.slice(0, 16) ||
+          selectedDate.toISOString().slice(0, 16)
+        }
         error={errors?.date}
         {...register("date")}
       />

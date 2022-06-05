@@ -8,12 +8,13 @@ import { CalendarContext } from "../../hooks/useCalendar";
 import { api } from "../../services/api";
 import BaseModal from "../BaseModal";
 import ColorPicker from "../ColorPicker";
+import Form from "../Form";
 import Input from "../Input";
 import TemperatureDisplayer from "../TemperatureDisplayer";
 import styles from "./styles.module.scss";
 
 const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
-  const { reminders, setReminders, selectedReminder } =
+  const { reminders, setReminders, selectedReminder, setSelectedReminder } =
     useContext(CalendarContext);
 
   const [selectedColor, setSelectedColor] = useState(selectedReminder?.color);
@@ -27,6 +28,9 @@ const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
   useEffect(() => {
     reset();
     setSelectedColor(selectedReminder?.color);
+    if (!showModal) {
+      setSelectedReminder(null);
+    }
   }, [showModal]);
 
   const {
@@ -94,38 +98,7 @@ const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
         <div className={styles["container__delete-reminder-wrapper"]}>
           <b onClick={handleOnDeleteReminderClick}>Delete reminder</b>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            label="Title"
-            name="title"
-            maxLength={30}
-            placeholder="Dinner with mom"
-            defaultValue={selectedReminder?.title}
-            {...register("title")}
-          />
-          <Input
-            label="City"
-            name="city"
-            placeholder="New York"
-            defaultValue={selectedReminder?.city}
-            {...register("city")}
-          />
-          <Input
-            label="Date"
-            name="date"
-            placeholder="New York"
-            type="datetime-local"
-            defaultValue={selectedReminder?.date?.slice(0, 16) || ""}
-            {...register("date")}
-          />
-          <ColorPicker
-            selectedColor={selectedColor}
-            setSelectedColor={setSelectedColor}
-          />
-          <TemperatureDisplayer temperature={selectedReminder?.temp} />
-
-          <button type="submit">Botão</button>
-        </form>
+        <Form setShowModal={setShowModal} currentModalVisibility={showModal} />
       </div>
     </BaseModal>
   );
