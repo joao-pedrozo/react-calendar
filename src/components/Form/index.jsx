@@ -10,6 +10,7 @@ import { api } from "../../services/api";
 import colors from "../../utils/colors";
 import ColorPicker from "../ColorPicker";
 import Input from "../Input";
+import TemperatureDisplayer from "../TemperatureDisplayer";
 
 const schema = yup.object({
   title: yup.string().required("Title field is required"),
@@ -131,6 +132,8 @@ const Form = ({ currentModalVisibility, setShowModal, selectedDate }) => {
         selectedColor={selectedColor}
         setSelectedColor={setSelectedColor}
       />
+      <TemperatureDisplayer temperature={selectedReminder?.temp} />
+
       <button type="submit">Botão</button>
     </form>
   );
