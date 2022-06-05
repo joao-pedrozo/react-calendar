@@ -66,7 +66,7 @@ function Calendar(props) {
             year: "numeric",
           })}
         </b>
-        <div className="container__buttons-wrapper">
+        <div className="buttons-wrapper">
           <button onClick={handlePreviousButtonPress}>Previous</button>
           <button onClick={handleOnTodayButtonPress}>Today</button>
           <button onClick={handleNextButtonPress}>Next</button>
