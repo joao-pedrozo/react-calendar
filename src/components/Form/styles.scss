@@ -1,0 +1,11 @@
+.form-component-wrapper {
+  .buttons-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    button {
+      width: 5rem;
+    }
+  }
+}

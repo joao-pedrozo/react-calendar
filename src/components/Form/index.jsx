@@ -8,9 +8,11 @@ import * as yup from "yup";
 import { CalendarContext } from "../../hooks/useCalendar";
 import { api } from "../../services/api";
 import colors from "../../utils/colors";
+import Button from "../Button/index";
 import ColorPicker from "../ColorPicker";
 import Input from "../Input";
 import TemperatureDisplayer from "../TemperatureDisplayer";
+import "./styles.scss";
 
 const schema = yup.object({
   title: yup.string().required("Title field is required"),
@@ -97,8 +99,12 @@ const Form = ({ currentModalVisibility, setShowModal, selectedDate }) => {
     }
   };
 
+  const handleCancelButtonPress = () => {
+    setShowModal(false);
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className="form-component-wrapper">
       <Input
         label="Title"
         name="title"
@@ -134,7 +140,12 @@ const Form = ({ currentModalVisibility, setShowModal, selectedDate }) => {
       />
       <TemperatureDisplayer temperature={selectedReminder?.temp} />
 
-      <button type="submit">Botão</button>
+      <div className="buttons-wrapper">
+        <Button onClick={handleCancelButtonPress} kind="cancel" type="submit">
+          Cancel
+        </Button>
+        <Button type="submit">Save</Button>
+      </div>
     </form>
   );
 };

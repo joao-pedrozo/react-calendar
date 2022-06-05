@@ -5,11 +5,17 @@
 
   h1 {
     text-align: center;
+    margin-bottom: 0.5rem;
+    background: #121fcf;
+    background: linear-gradient(to right, #121fcf 0%, #3a84cf 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .buttons-wrapper {
     display: flex;
     gap: 1rem;
+    margin: 0.5rem 0;
   }
 
   ul {
@@ -20,7 +26,7 @@
     width: 800px;
 
     li {
-      border: 1px solid black;
+      border: 1px solid #d4d9d7;
       height: 120px;
       margin: 0 -1px -1px 0;
       display: flex;

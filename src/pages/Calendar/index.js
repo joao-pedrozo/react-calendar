@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 
 import AddReminderModal from "../../components/AddReminderModal";
+import Button from "../../components/Button/index";
+import ShowAllRemindersModal from "../../components/ShowAllRemidersModal";
 import ViewAndEditReminderModal from "../../components/ViewAndEditReminderModal";
 import "./styles.scss";
 import { CalendarContext } from "../../hooks/useCalendar";
@@ -14,6 +16,8 @@ function Calendar(props) {
   const [showViewAndEditReminderModal, setShowViewAndEditReminderModal] =
     useState(false);
   const [selectedDay, setSelectedDay] = useState(new Date());
+  const [showViewAllRemindersModal, setShowViewAllRemindersModal] =
+    useState(false);
 
   const { reminders, setSelectedReminder } = useContext(CalendarContext);
 
@@ -50,10 +54,15 @@ function Calendar(props) {
   };
 
   const handleOnClickDay = (event, date) => {
+    setSelectedDay(date);
+
     if (event.target.id === "calendar-day") {
       setShowAddReminderModal(true);
-      setSelectedDay(date);
     }
+  };
+
+  const handleOnViewAllRemindersPress = () => {
+    setShowViewAllRemindersModal(true);
   };
 
   return (
@@ -67,9 +76,9 @@ function Calendar(props) {
           })}
         </b>
         <div className="buttons-wrapper">
-          <button onClick={handlePreviousButtonPress}>Previous</button>
-          <button onClick={handleOnTodayButtonPress}>Today</button>
-          <button onClick={handleNextButtonPress}>Next</button>
+          <Button onClick={handlePreviousButtonPress}>Previous</Button>
+          <Button onClick={handleOnTodayButtonPress}>Today</Button>
+          <Button onClick={handleNextButtonPress}>Next</Button>
         </div>
 
         <ul>
@@ -110,7 +119,10 @@ function Calendar(props) {
                     new Date(reminder.date).toDateString() ===
                     day.toDateString()
                 ).length > 2 && (
-                  <div className="reminder-wrapper">
+                  <div
+                    className="reminder-wrapper"
+                    onClick={handleOnViewAllRemindersPress}
+                  >
                     <b>View All</b>
                   </div>
                 )}
@@ -127,6 +139,11 @@ function Calendar(props) {
       <ViewAndEditReminderModal
         showModal={showViewAndEditReminderModal}
         setShowModal={setShowViewAndEditReminderModal}
+      />
+      <ShowAllRemindersModal
+        showModal={showViewAllRemindersModal}
+        setShowModal={setShowViewAllRemindersModal}
+        selectedDate={selectedDay}
       />
     </>
   );

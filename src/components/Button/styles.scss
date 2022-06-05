@@ -1,0 +1,25 @@
+.button-component-wrapper {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-out;
+
+  &--default {
+    background-color: #1c5fe6;
+
+    &:hover {
+      background-color: #1950bf;
+    }
+  }
+
+  &--cancel {
+    background-color: #eb5757;
+
+    &:hover {
+      background-color: #d62020;
+    }
+  }
+}

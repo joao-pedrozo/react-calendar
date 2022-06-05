@@ -1,0 +1,48 @@
+.container {
+  background-color: #fff;
+  width: 400px;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  overflow-y: auto;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+  }
+
+  ul {
+    padding-left: 0;
+    margin-top: 1rem;
+
+    li {
+      width: 100%;
+      margin-top: 0;
+      padding: 1rem 1rem;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 3px solid #fff;
+
+      span {
+        margin: 0 1rem;
+        text-align: center;
+      }
+
+      b:last-child {
+        width: 32px;
+      }
+    }
+  }
+
+  button {
+    margin: 1rem auto;
+  }
+}

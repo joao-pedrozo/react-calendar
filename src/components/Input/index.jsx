@@ -6,8 +6,6 @@ import "./styles.scss";
 
 export const Input = forwardRef(
   ({ name, label, error, type, ...rest }, ref) => {
-    console.log(error);
-
     return (
       <div
         className={`input-container ${error ? "input-container--errored" : ""}`}
