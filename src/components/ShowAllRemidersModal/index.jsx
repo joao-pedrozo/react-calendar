@@ -30,7 +30,7 @@ const ShowAllRemindersModal = ({ setShowModal, showModal, selectedDate }) => {
                 selectedDate.toDateString()
             )
             .map((reminder) => (
-              <li style={{ backgroundColor: reminder.color }}>
+              <li style={{ backgroundColor: reminder.color }} key={reminder.id}>
                 <b>{getHours(reminder.date)}</b>
                 <span>
                   {reminder.title} <br /> <b>{reminder.city}</b>

@@ -107,6 +107,7 @@ function Calendar(props) {
                   .slice(-2)
                   .map((reminder) => (
                     <div
+                      key={reminder.id}
                       className="reminder-wrapper"
                       style={{ backgroundColor: reminder.color }}
                       onClick={() => handleOnReminderClick(reminder)}
