@@ -12,4 +12,14 @@
     flex-direction: column;
     row-gap: 1rem;
   }
+
+  &__delete-reminder-wrapper {
+    margin: 0.5rem 0;
+    color: #f02424;
+    text-align: center;
+
+    b {
+      cursor: pointer;
+    }
+  }
 }

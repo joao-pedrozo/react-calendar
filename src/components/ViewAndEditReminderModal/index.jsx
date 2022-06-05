@@ -1,16 +1,16 @@
+import { useState, useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
-import { CalendarContext } from "../../hooks/useCalendar";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import BaseModal from "../BaseModal";
-import Input from "../Input";
-import styles from "./styles.module.scss";
-import ColorPicker from "../ColorPicker";
-import { useState, useEffect, useContext } from "react";
+import { CalendarContext } from "../../hooks/useCalendar";
 import { api } from "../../services/api";
+import BaseModal from "../BaseModal";
+import ColorPicker from "../ColorPicker";
+import Input from "../Input";
 import TemperatureDisplayer from "../TemperatureDisplayer";
+import styles from "./styles.module.scss";
 
 const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
   const { reminders, setReminders, selectedReminder } =
@@ -80,10 +80,20 @@ const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
     }
   };
 
+  const handleOnDeleteReminderClick = () => {
+    setReminders(
+      reminders.filter((reminder) => reminder.id !== selectedReminder.id)
+    );
+    setShowModal(false);
+  };
+
   return (
     <BaseModal showModal={showModal} setShowModal={setShowModal}>
       <div className={styles.container}>
         <h1>View/Edit Reminder</h1>
+        <div className={styles["container__delete-reminder-wrapper"]}>
+          <b onClick={handleOnDeleteReminderClick}>Delete reminder</b>
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Input
             label="Title"
@@ -112,7 +122,7 @@ const ViewAndEditReminderModal = ({ setShowModal, showModal }) => {
             selectedColor={selectedColor}
             setSelectedColor={setSelectedColor}
           />
-          <TemperatureDisplayer temperature={selectedReminder.temp} />
+          <TemperatureDisplayer temperature={selectedReminder?.temp} />
 
           <button type="submit">Botão</button>
         </form>
