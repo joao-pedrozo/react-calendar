@@ -43,3 +43,7 @@ $ yarn start
 # Acess the application in the browser
 http://localhost:3000/calendar
 ```
+
+## Final considerations
+
+I really enjoyed doing this challenge and I just think I messed up a little about styling, it was my first time using SASS with React and I kinda messed up about modules and BEM, using in some places and in others don't. In a daily basis I would spend more time without pressure to analize and implement following a pattern, but in this case I was kinda nervous xD. Anyway, thanks for reading, hope you guys enjoy my submition!
